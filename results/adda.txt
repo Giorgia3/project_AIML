@@ -1,0 +1,287 @@
+
+
+/content/gdrive/My Drive/Colab Notebooks/project_folder/human-pose-estimation.pytorch
+=> creating output/coco/ADDA_pose_resnet_50/256x192_d256x3_adam_lr1e-3_adda
+=> creating log/coco/ADDA_pose_resnet_50/256x192_d256x3_adam_lr1e-3_adda_2020-02-06-21-19
+Namespace(adapt=2, cfg='experiments/coco/resnet50/256x192_d256x3_adam_lr1e-3_adda.yaml', frequent=100, gpus=None, workers=None)
+{'CUDNN': {'BENCHMARK': True, 'DETERMINISTIC': False, 'ENABLED': True},
+ 'DATASET': {'DATASET': 'coco',
+             'DATA_FORMAT': 'jpg',
+             'FLIP': True,
+             'HYBRID_JOINTS_TYPE': '',
+             'PAINTING_SET': 'painting_train',
+             'ROOT': 'data/coco/',
+             'ROT_FACTOR': 40,
+             'SCALE_FACTOR': 0.3,
+             'SELECT_DATA': False,
+             'TEST_SET': 'prova2017',
+             'TRAIN_NO_AUG_SET': '',
+             'TRAIN_SET': 'train2017'},
+ 'DATA_DIR': '',
+ 'DEBUG': {'DEBUG': True,
+           'SAVE_BATCH_IMAGES_GT': True,
+           'SAVE_BATCH_IMAGES_PRED': True,
+           'SAVE_HEATMAPS_GT': True,
+           'SAVE_HEATMAPS_PRED': True},
+ 'GPUS': '0',
+ 'LOG_DIR': 'log',
+ 'LOSS': {'USE_TARGET_WEIGHT': True},
+ 'MODEL': {'EXTRA': {'DECONV_WITH_BIAS': False,
+                     'FINAL_CONV_KERNEL': 1,
+                     'HEATMAP_SIZE': array([48, 64]),
+                     'NUM_DECONV_FILTERS': [256, 256, 256],
+                     'NUM_DECONV_KERNELS': [4, 4, 4],
+                     'NUM_DECONV_LAYERS': 3,
+                     'NUM_LAYERS': 50,
+                     'SIGMA': 2,
+                     'TARGET_TYPE': 'gaussian'},
+           'IMAGE_SIZE': array([192, 256]),
+           'INIT_WEIGHTS': True,
+           'NAME': 'ADDA_pose_resnet',
+           'NUM_JOINTS': 17,
+           'PRETRAINED': 'models/pytorch/pose_coco/pose_resnet_50_256x192.pth.tar',
+           'STYLE': 'pytorch'},
+ 'OUTPUT_DIR': 'output',
+ 'PRINT_FREQ': 100,
+ 'TEST': {'BATCH_SIZE': 32,
+          'BBOX_THRE': 1.0,
+          'COCO_BBOX_FILE': '',
+          'FLIP_TEST': False,
+          'IMAGE_THRE': 0.0,
+          'IN_VIS_THRE': 0.2,
+          'MODEL_FILE': '',
+          'NMS_THRE': 1.0,
+          'OKS_THRE': 0.9,
+          'POST_PROCESS': True,
+          'SHIFT_HEATMAP': True,
+          'USE_GT_BBOX': True},
+ 'TRAIN': {'BATCH_SIZE': 32,
+           'BEGIN_EPOCH': 0,
+           'CHECKPOINT': '',
+           'END_EPOCH': 140,
+           'GAMMA1': 0.99,
+           'GAMMA2': 0.0,
+           'LR': 0.001,
+           'LR_FACTOR': 0.1,
+           'LR_STEP': [90, 120],
+           'MOMENTUM': 0.9,
+           'NESTEROV': False,
+           'OPTIMIZER': 'adam',
+           'RESUME': False,
+           'SHUFFLE': True,
+           'WD': 0.0001},
+ 'WORKERS': 4}
+/usr/local/lib/python3.6/dist-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='mean' instead.
+  warnings.warn(warning.format(ret))
+loading annotations into memory...
+Done (t=1.51s)
+creating index...
+index created!
+=> classes: ['__background__', 'person']
+=> num_images: 5000
+=> load 6352 samples
+loading annotations into memory...
+Done (t=0.34s)
+creating index...
+index created!
+=> classes: ['__background__', 'person']
+=> num_images: 88
+=> load 143 samples
+Images dir data/coco/images/painting_train
+(2)----------------Training target encoder
+/usr/local/lib/python3.6/dist-packages/torch/nn/modules/container.py:100: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  input = module(input)
+Epoch [1/140] Step [1/58]:d_loss=0.69254 g_loss=0.68838 acc=0.65625
+Epoch [2/140] Step [1/58]:d_loss=0.80796 g_loss=0.51472 acc=0.50000
+Epoch [3/140] Step [1/58]:d_loss=0.79493 g_loss=0.55354 acc=0.50000
+Epoch [4/140] Step [1/58]:d_loss=0.98401 g_loss=0.50000 acc=0.50000
+Epoch [5/140] Step [1/58]:d_loss=1.00918 g_loss=0.59486 acc=0.50000
+Epoch [6/140] Step [1/58]:d_loss=1.00992 g_loss=0.71957 acc=0.50000
+Epoch [7/140] Step [1/58]:d_loss=0.90751 g_loss=0.56881 acc=0.50000
+Epoch [8/140] Step [1/58]:d_loss=0.95403 g_loss=0.56845 acc=0.50000
+Epoch [9/140] Step [1/58]:d_loss=0.84309 g_loss=0.62791 acc=0.50000
+Epoch [10/140] Step [1/58]:d_loss=0.95508 g_loss=0.54989 acc=0.50000
+Epoch [11/140] Step [1/58]:d_loss=0.85571 g_loss=0.77007 acc=0.50000
+Epoch [12/140] Step [1/58]:d_loss=1.03072 g_loss=0.55151 acc=0.50000
+Epoch [13/140] Step [1/58]:d_loss=0.91334 g_loss=0.54340 acc=0.50000
+Epoch [14/140] Step [1/58]:d_loss=0.92632 g_loss=0.59558 acc=0.50000
+Epoch [15/140] Step [1/58]:d_loss=0.99039 g_loss=0.44811 acc=0.50000
+Epoch [16/140] Step [1/58]:d_loss=0.87533 g_loss=0.58267 acc=0.50000
+Epoch [17/140] Step [1/58]:d_loss=0.85598 g_loss=0.56725 acc=0.50000
+Epoch [18/140] Step [1/58]:d_loss=0.93805 g_loss=0.57416 acc=0.50000
+Epoch [19/140] Step [1/58]:d_loss=0.91015 g_loss=0.55169 acc=0.50000
+Epoch [20/140] Step [1/58]:d_loss=0.92496 g_loss=0.55039 acc=0.50000
+Epoch [21/140] Step [1/58]:d_loss=0.85789 g_loss=0.55564 acc=0.50000
+Epoch [22/140] Step [1/58]:d_loss=0.89631 g_loss=0.50029 acc=0.50000
+Epoch [23/140] Step [1/58]:d_loss=0.85032 g_loss=0.45291 acc=0.50000
+Epoch [24/140] Step [1/58]:d_loss=0.88408 g_loss=0.64384 acc=0.50000
+Epoch [25/140] Step [1/58]:d_loss=0.90843 g_loss=0.51342 acc=0.50000
+Epoch [26/140] Step [1/58]:d_loss=0.88080 g_loss=0.58704 acc=0.50000
+Epoch [27/140] Step [1/58]:d_loss=0.82701 g_loss=0.53573 acc=0.50000
+Epoch [28/140] Step [1/58]:d_loss=0.87275 g_loss=0.48843 acc=0.50000
+Epoch [29/140] Step [1/58]:d_loss=0.84656 g_loss=0.51756 acc=0.50000
+Epoch [30/140] Step [1/58]:d_loss=0.79981 g_loss=0.63681 acc=0.50000
+Epoch [31/140] Step [1/58]:d_loss=0.87387 g_loss=0.45551 acc=0.50000
+Epoch [32/140] Step [1/58]:d_loss=0.80473 g_loss=0.57303 acc=0.50000
+Epoch [33/140] Step [1/58]:d_loss=0.88281 g_loss=0.56864 acc=0.50000
+Epoch [34/140] Step [1/58]:d_loss=0.84823 g_loss=0.49891 acc=0.50000
+Epoch [35/140] Step [1/58]:d_loss=0.77660 g_loss=0.50352 acc=0.50000
+Epoch [36/140] Step [1/58]:d_loss=0.79998 g_loss=0.53465 acc=0.50000
+Epoch [37/140] Step [1/58]:d_loss=0.84228 g_loss=0.47194 acc=0.50000
+Epoch [38/140] Step [1/58]:d_loss=0.78678 g_loss=0.48309 acc=0.50000
+Epoch [39/140] Step [1/58]:d_loss=0.86480 g_loss=0.44123 acc=0.50000
+Epoch [40/140] Step [1/58]:d_loss=0.96626 g_loss=0.43076 acc=0.50000
+Epoch [41/140] Step [1/58]:d_loss=0.78673 g_loss=0.43282 acc=0.50000
+Epoch [42/140] Step [1/58]:d_loss=0.82190 g_loss=0.49925 acc=0.50000
+Epoch [43/140] Step [1/58]:d_loss=0.75912 g_loss=0.50314 acc=0.50000
+Epoch [44/140] Step [1/58]:d_loss=0.81875 g_loss=0.58037 acc=0.50000
+Epoch [45/140] Step [1/58]:d_loss=0.87627 g_loss=0.51605 acc=0.50000
+Epoch [46/140] Step [1/58]:d_loss=0.79005 g_loss=0.52240 acc=0.50000
+Epoch [47/140] Step [1/58]:d_loss=0.80564 g_loss=0.48271 acc=0.50000
+Epoch [48/140] Step [1/58]:d_loss=0.76052 g_loss=0.51456 acc=0.50000
+Epoch [49/140] Step [1/58]:d_loss=0.79511 g_loss=0.54658 acc=0.50000
+Epoch [50/140] Step [1/58]:d_loss=0.76261 g_loss=0.51721 acc=0.50000
+Epoch [51/140] Step [1/58]:d_loss=0.86239 g_loss=0.47119 acc=0.50000
+Epoch [52/140] Step [1/58]:d_loss=0.76871 g_loss=0.52164 acc=0.50000
+Epoch [53/140] Step [1/58]:d_loss=0.83707 g_loss=0.50116 acc=0.50000
+Epoch [54/140] Step [1/58]:d_loss=0.76127 g_loss=0.47253 acc=0.50000
+Epoch [55/140] Step [1/58]:d_loss=0.82086 g_loss=0.49797 acc=0.50000
+Epoch [56/140] Step [1/58]:d_loss=0.82262 g_loss=0.47622 acc=0.50000
+Epoch [57/140] Step [1/58]:d_loss=0.74820 g_loss=0.55358 acc=0.50000
+Epoch [58/140] Step [1/58]:d_loss=0.76758 g_loss=0.52589 acc=0.50000
+Epoch [59/140] Step [1/58]:d_loss=0.78214 g_loss=0.57178 acc=0.50000
+Epoch [60/140] Step [1/58]:d_loss=0.80257 g_loss=0.52766 acc=0.50000
+Epoch [61/140] Step [1/58]:d_loss=0.82908 g_loss=0.54264 acc=0.50000
+Epoch [62/140] Step [1/58]:d_loss=0.76495 g_loss=0.56920 acc=0.50000
+Epoch [63/140] Step [1/58]:d_loss=0.77494 g_loss=0.51278 acc=0.50000
+Epoch [64/140] Step [1/58]:d_loss=0.80213 g_loss=0.56994 acc=0.50000
+Epoch [65/140] Step [1/58]:d_loss=0.79662 g_loss=0.56271 acc=0.50000
+Epoch [66/140] Step [1/58]:d_loss=0.71522 g_loss=0.60950 acc=0.50000
+Epoch [67/140] Step [1/58]:d_loss=0.72355 g_loss=0.54058 acc=0.50000
+Epoch [68/140] Step [1/58]:d_loss=0.71027 g_loss=0.64215 acc=0.50000
+Epoch [69/140] Step [1/58]:d_loss=0.74295 g_loss=0.63348 acc=0.50000
+Epoch [70/140] Step [1/58]:d_loss=0.70180 g_loss=0.61326 acc=0.50000
+Epoch [71/140] Step [1/58]:d_loss=0.73554 g_loss=0.49618 acc=0.50000
+Epoch [72/140] Step [1/58]:d_loss=0.69559 g_loss=0.61252 acc=0.50000
+Epoch [73/140] Step [1/58]:d_loss=0.72602 g_loss=0.57037 acc=0.50000
+Epoch [74/140] Step [1/58]:d_loss=0.78842 g_loss=0.61724 acc=0.50000
+Epoch [75/140] Step [1/58]:d_loss=0.70462 g_loss=0.62345 acc=0.50000
+Epoch [76/140] Step [1/58]:d_loss=0.73244 g_loss=0.58445 acc=0.50000
+Epoch [77/140] Step [1/58]:d_loss=0.72107 g_loss=0.59572 acc=0.50000
+Epoch [78/140] Step [1/58]:d_loss=0.71594 g_loss=0.51775 acc=0.50000
+Epoch [79/140] Step [1/58]:d_loss=0.71173 g_loss=0.54086 acc=0.50000
+Epoch [80/140] Step [1/58]:d_loss=0.71839 g_loss=0.55566 acc=0.50000
+Epoch [81/140] Step [1/58]:d_loss=0.72487 g_loss=0.48031 acc=0.50000
+Epoch [82/140] Step [1/58]:d_loss=0.71409 g_loss=0.50415 acc=0.50000
+Epoch [83/140] Step [1/58]:d_loss=0.71198 g_loss=0.53476 acc=0.50000
+Epoch [84/140] Step [1/58]:d_loss=0.71825 g_loss=0.48758 acc=0.50000
+Epoch [85/140] Step [1/58]:d_loss=0.71181 g_loss=0.51464 acc=0.50000
+Epoch [86/140] Step [1/58]:d_loss=0.71342 g_loss=0.52643 acc=0.50000
+Epoch [87/140] Step [1/58]:d_loss=0.70630 g_loss=0.54192 acc=0.50000
+Epoch [88/140] Step [1/58]:d_loss=0.70313 g_loss=0.57594 acc=0.50000
+Epoch [89/140] Step [1/58]:d_loss=0.69939 g_loss=0.56150 acc=0.50000
+Epoch [90/140] Step [1/58]:d_loss=0.69822 g_loss=0.56367 acc=0.50000
+Epoch [91/140] Step [1/58]:d_loss=0.69527 g_loss=0.60816 acc=0.50000
+Epoch [92/140] Step [1/58]:d_loss=0.70732 g_loss=0.56902 acc=0.50000
+Epoch [93/140] Step [1/58]:d_loss=0.71071 g_loss=0.57641 acc=0.50000
+Epoch [94/140] Step [1/58]:d_loss=0.70258 g_loss=0.55539 acc=0.50000
+Epoch [95/140] Step [1/58]:d_loss=0.69829 g_loss=0.54815 acc=0.50000
+Epoch [96/140] Step [1/58]:d_loss=0.69805 g_loss=0.59060 acc=0.50000
+Epoch [97/140] Step [1/58]:d_loss=0.70951 g_loss=0.53031 acc=0.50000
+Epoch [98/140] Step [1/58]:d_loss=0.69214 g_loss=0.59870 acc=0.50000
+Epoch [99/140] Step [1/58]:d_loss=0.69658 g_loss=0.59250 acc=0.50000
+Epoch [100/140] Step [1/58]:d_loss=0.70155 g_loss=0.55594 acc=0.50000
+Epoch [101/140] Step [1/58]:d_loss=0.71729 g_loss=0.62708 acc=0.50000
+Epoch [102/140] Step [1/58]:d_loss=0.69665 g_loss=0.57476 acc=0.50000
+Epoch [103/140] Step [1/58]:d_loss=0.70548 g_loss=0.56371 acc=0.50000
+Epoch [104/140] Step [1/58]:d_loss=0.70653 g_loss=0.56158 acc=0.50000
+Epoch [105/140] Step [1/58]:d_loss=0.70493 g_loss=0.57607 acc=0.50000
+Epoch [106/140] Step [1/58]:d_loss=0.86197 g_loss=0.62653 acc=0.50000
+Epoch [107/140] Step [1/58]:d_loss=0.69185 g_loss=0.53341 acc=0.50000
+Epoch [108/140] Step [1/58]:d_loss=0.70556 g_loss=0.57098 acc=0.50000
+Epoch [109/140] Step [1/58]:d_loss=0.69986 g_loss=0.59762 acc=0.50000
+Epoch [110/140] Step [1/58]:d_loss=0.69476 g_loss=0.58294 acc=0.50000
+Epoch [111/140] Step [1/58]:d_loss=0.70561 g_loss=0.58114 acc=0.50000
+Epoch [112/140] Step [1/58]:d_loss=0.69624 g_loss=0.59751 acc=0.50000
+Epoch [113/140] Step [1/58]:d_loss=0.70429 g_loss=0.59940 acc=0.50000
+Epoch [114/140] Step [1/58]:d_loss=0.69986 g_loss=0.60708 acc=0.50000
+Epoch [115/140] Step [1/58]:d_loss=0.69478 g_loss=0.61714 acc=0.53125
+Epoch [116/140] Step [1/58]:d_loss=0.69500 g_loss=0.60497 acc=0.50000
+Epoch [117/140] Step [1/58]:d_loss=0.70220 g_loss=0.60736 acc=0.50000
+Epoch [118/140] Step [1/58]:d_loss=0.69471 g_loss=0.60064 acc=0.50000
+Epoch [119/140] Step [1/58]:d_loss=0.70148 g_loss=0.62768 acc=0.50000
+Epoch [120/140] Step [1/58]:d_loss=0.70043 g_loss=0.57472 acc=0.50000
+Epoch [121/140] Step [1/58]:d_loss=0.69431 g_loss=0.63322 acc=0.50000
+Epoch [122/140] Step [1/58]:d_loss=0.69340 g_loss=0.64479 acc=0.48438
+Epoch [123/140] Step [1/58]:d_loss=0.69809 g_loss=0.61415 acc=0.50000
+Epoch [124/140] Step [1/58]:d_loss=0.69454 g_loss=0.62541 acc=0.50000
+Epoch [125/140] Step [1/58]:d_loss=0.69343 g_loss=0.62589 acc=0.50000
+Epoch [126/140] Step [1/58]:d_loss=0.70304 g_loss=0.59571 acc=0.50000
+Epoch [127/140] Step [1/58]:d_loss=0.69699 g_loss=0.63402 acc=0.50000
+Epoch [128/140] Step [1/58]:d_loss=0.69363 g_loss=0.65670 acc=0.50000
+Epoch [129/140] Step [1/58]:d_loss=0.69181 g_loss=0.65538 acc=0.51562
+Epoch [130/140] Step [1/58]:d_loss=0.69114 g_loss=0.66286 acc=0.50000
+Epoch [131/140] Step [1/58]:d_loss=0.69304 g_loss=0.64639 acc=0.50000
+Epoch [132/140] Step [1/58]:d_loss=0.69599 g_loss=0.60161 acc=0.50000
+Epoch [133/140] Step [1/58]:d_loss=0.69755 g_loss=0.64076 acc=0.50000
+Epoch [134/140] Step [1/58]:d_loss=0.69525 g_loss=0.62265 acc=0.51562
+Epoch [135/140] Step [1/58]:d_loss=0.69086 g_loss=0.63601 acc=0.50000
+Epoch [136/140] Step [1/58]:d_loss=0.69432 g_loss=0.62028 acc=0.50000
+Epoch [137/140] Step [1/58]:d_loss=0.69630 g_loss=0.62578 acc=0.50000
+Epoch [138/140] Step [1/58]:d_loss=0.69619 g_loss=0.59831 acc=0.50000
+Epoch [139/140] Step [1/58]:d_loss=0.69348 g_loss=0.63782 acc=0.50000
+Epoch [140/140] Step [1/58]:d_loss=0.69559 g_loss=0.63196 acc=0.50000
+(3)----------------Test
+(3.a)---------------->>> source only <<<
+Test: [0/5]	Time 9.373 (9.373)	Loss 0.0004 (0.0004)	Accuracy 0.827 (0.827)
+=> Writing results json to output/coco/ADDA_pose_resnet_50/256x192_d256x3_adam_lr1e-3_adda/results/keypoints_prova2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.01s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.781
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.990
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.913
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.551
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.798
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.817
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.993
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.923
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.618
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.833
+=> coco eval results saved to output/coco/ADDA_pose_resnet_50/256x192_d256x3_adam_lr1e-3_adda/results/keypoints_prova2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_ADDA_pose_resnet_50_d256d256d256 | 0.781 | 0.990 | 0.913 | 0.551 | 0.798 | 0.817 | 0.993 | 0.923 | 0.618 | 0.833 |
+(3.b)---------------->>> domain adaption <<<
+Test: [0/5]	Time 1.166 (1.166)	Loss 0.0007 (0.0007)	Accuracy 0.668 (0.668)
+=> Writing results json to output/coco/ADDA_pose_resnet_50/256x192_d256x3_adam_lr1e-3_adda2/results/keypoints_prova2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.576
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.875
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.652
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.327
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.598
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.617
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.881
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.706
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.327
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.641
+=> coco eval results saved to output/coco/ADDA_pose_resnet_50/256x192_d256x3_adam_lr1e-3_adda2/results/keypoints_prova2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_ADDA_pose_resnet_50_d256d256d256 | 0.576 | 0.875 | 0.652 | 0.327 | 0.598 | 0.617 | 0.881 | 0.706 | 0.327 | 0.641 |
+

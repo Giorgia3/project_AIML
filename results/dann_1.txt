@@ -1,0 +1,1121 @@
+
+####### drouptout + nn.Linear finale per il discriminatore. solo un discriminatore dopo il layer 4 della resnet ############
+
+
+/content/gdrive/My Drive/Colab Notebooks/project_folder/human-pose-estimation.pytorch
+=> creating output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+=> creating log/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann_2020-02-01-10-17
+Namespace(cfg='experiments/coco/resnet50/256x192_d256x3_adam_lr1e-3_dann.yaml', dann=1, frequent=100, gpus=None, workers=None)
+{'CUDNN': {'BENCHMARK': True, 'DETERMINISTIC': False, 'ENABLED': True},
+ 'DATASET': {'DATASET': 'coco',
+             'DATA_FORMAT': 'jpg',
+             'FLIP': True,
+             'HYBRID_JOINTS_TYPE': '',
+             'PAINTING_SET': 'painting_train',
+             'ROOT': 'data/coco/',
+             'ROT_FACTOR': 40,
+             'SCALE_FACTOR': 0.3,
+             'SELECT_DATA': False,
+             'TEST_SET': 'val2017',
+             'TRAIN_SET': 'train2017'},
+ 'DATA_DIR': '',
+ 'DEBUG': {'DEBUG': True,
+           'SAVE_BATCH_IMAGES_GT': True,
+           'SAVE_BATCH_IMAGES_PRED': True,
+           'SAVE_HEATMAPS_GT': True,
+           'SAVE_HEATMAPS_PRED': True},
+ 'GPUS': '0',
+ 'LOG_DIR': 'log',
+ 'LOSS': {'USE_TARGET_WEIGHT': True},
+ 'MODEL': {'EXTRA': {'DECONV_WITH_BIAS': False,
+                     'FINAL_CONV_KERNEL': 1,
+                     'HEATMAP_SIZE': array([48, 64]),
+                     'NUM_DECONV_FILTERS': [256, 256, 256],
+                     'NUM_DECONV_KERNELS': [4, 4, 4],
+                     'NUM_DECONV_LAYERS': 3,
+                     'NUM_LAYERS': 50,
+                     'SIGMA': 2,
+                     'TARGET_TYPE': 'gaussian'},
+           'IMAGE_SIZE': array([192, 256]),
+           'INIT_WEIGHTS': True,
+           'NAME': 'DANN_pose_resnet',
+           'NUM_JOINTS': 17,
+           'PRETRAINED': 'models/pytorch/imagenet/resnet50-19c8e357.pth',
+           'STYLE': 'pytorch'},
+ 'OUTPUT_DIR': 'output',
+ 'PRINT_FREQ': 100,
+ 'TEST': {'BATCH_SIZE': 32,
+          'BBOX_THRE': 1.0,
+          'COCO_BBOX_FILE': '',
+          'FLIP_TEST': False,
+          'IMAGE_THRE': 0.0,
+          'IN_VIS_THRE': 0.2,
+          'MODEL_FILE': '',
+          'NMS_THRE': 1.0,
+          'OKS_THRE': 0.9,
+          'POST_PROCESS': True,
+          'SHIFT_HEATMAP': True,
+          'USE_GT_BBOX': True},
+ 'TRAIN': {'BATCH_SIZE': 32,
+           'BEGIN_EPOCH': 0,
+           'CHECKPOINT': '',
+           'END_EPOCH': 140,
+           'GAMMA1': 0.99,
+           'GAMMA2': 0.0,
+           'LR': 0.001,
+           'LR_FACTOR': 0.1,
+           'LR_STEP': [90, 120],
+           'MOMENTUM': 0.9,
+           'NESTEROV': False,
+           'OPTIMIZER': 'adam',
+           'RESUME': False,
+           'SHUFFLE': True,
+           'WD': 0.0001},
+ 'WORKERS': 4}
+=> init deconv weights from normal distribution
+=> init 0.weight as normal(0, 0.001)
+=> init 0.bias as 0
+=> init 1.weight as 1
+=> init 1.bias as 0
+=> init 3.weight as normal(0, 0.001)
+=> init 3.bias as 0
+=> init 4.weight as 1
+=> init 4.bias as 0
+=> init 6.weight as normal(0, 0.001)
+=> init 6.bias as 0
+=> init 7.weight as 1
+=> init 7.bias as 0
+=> init final conv weights from normal distribution
+=> init 8.weight as normal(0, 0.001)
+=> init 8.bias as 0
+=> loading pretrained model models/pytorch/imagenet/resnet50-19c8e357.pth
+/usr/local/lib/python3.6/dist-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='mean' instead.
+  warnings.warn(warning.format(ret))
+loading annotations into memory...
+Done (t=1.41s)
+creating index...
+index created!
+=> classes: ['__background__', 'person']
+=> num_images: 5000
+=> load 6352 samples
+loading annotations into memory...
+Done (t=0.29s)
+creating index...
+index created!
+=> classes: ['__background__', 'person']
+=> num_images: 100
+=> load 163 samples
+Images dir data/coco/images/painting_train
+/usr/local/lib/python3.6/dist-packages/torch/optim/lr_scheduler.py:100: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule.See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [0][0/199]	Time 37.648s (37.648s)	Speed 0.8 samples/s	Data 32.813s (32.813s)	Loss 0.00134 (0.00134)	Accuracy 0.014 (0.014)
+Epoch: [0][100/199]	Time 1.068s (2.182s)	Speed 30.0 samples/s	Data 0.000s (1.111s)	Loss 0.00113 (0.00130)	Accuracy 0.016 (0.007)
+Test: [0/6]	Time 8.683 (8.683)	Loss 0.0015 (0.0015)	Accuracy 0.010 (0.010)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [1][0/199]	Time 3.633s (3.633s)	Speed 8.8 samples/s	Data 2.285s (2.285s)	Loss 0.00111 (0.00111)	Accuracy 0.013 (0.013)
+Epoch: [1][100/199]	Time 1.063s (1.107s)	Speed 30.1 samples/s	Data 0.000s (0.055s)	Loss 0.00131 (0.00122)	Accuracy 0.010 (0.016)
+Test: [0/6]	Time 1.158 (1.158)	Loss 0.0015 (0.0015)	Accuracy 0.038 (0.038)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.09s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [2][0/199]	Time 3.716s (3.716s)	Speed 8.6 samples/s	Data 2.444s (2.444s)	Loss 0.00119 (0.00119)	Accuracy 0.027 (0.027)
+Epoch: [2][100/199]	Time 1.052s (1.103s)	Speed 30.4 samples/s	Data 0.000s (0.057s)	Loss 0.00113 (0.00122)	Accuracy 0.018 (0.019)
+Test: [0/6]	Time 1.108 (1.108)	Loss 0.0015 (0.0015)	Accuracy 0.006 (0.006)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.05s).
+Accumulating evaluation results...
+DONE (t=0.01s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [3][0/199]	Time 3.659s (3.659s)	Speed 8.7 samples/s	Data 2.471s (2.471s)	Loss 0.00111 (0.00111)	Accuracy 0.013 (0.013)
+Epoch: [3][100/199]	Time 1.044s (1.091s)	Speed 30.6 samples/s	Data 0.000s (0.054s)	Loss 0.00104 (0.00122)	Accuracy 0.025 (0.014)
+Test: [0/6]	Time 1.263 (1.263)	Loss 0.0015 (0.0015)	Accuracy 0.049 (0.049)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [4][0/199]	Time 3.559s (3.559s)	Speed 9.0 samples/s	Data 2.231s (2.231s)	Loss 0.00115 (0.00115)	Accuracy 0.020 (0.020)
+Epoch: [4][100/199]	Time 1.031s (1.097s)	Speed 31.0 samples/s	Data 0.000s (0.054s)	Loss 0.00133 (0.00121)	Accuracy 0.035 (0.026)
+Test: [0/6]	Time 1.142 (1.142)	Loss 0.0015 (0.0015)	Accuracy 0.063 (0.063)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [5][0/199]	Time 3.102s (3.102s)	Speed 10.3 samples/s	Data 1.952s (1.952s)	Loss 0.00115 (0.00115)	Accuracy 0.034 (0.034)
+Epoch: [5][100/199]	Time 1.030s (1.096s)	Speed 31.1 samples/s	Data 0.000s (0.055s)	Loss 0.00119 (0.00121)	Accuracy 0.048 (0.022)
+Test: [0/6]	Time 1.199 (1.199)	Loss 0.0015 (0.0015)	Accuracy 0.058 (0.058)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [6][0/199]	Time 3.272s (3.272s)	Speed 9.8 samples/s	Data 2.072s (2.072s)	Loss 0.00128 (0.00128)	Accuracy 0.020 (0.020)
+Epoch: [6][100/199]	Time 1.043s (1.093s)	Speed 30.7 samples/s	Data 0.000s (0.054s)	Loss 0.00142 (0.00121)	Accuracy 0.015 (0.021)
+Test: [0/6]	Time 1.081 (1.081)	Loss 0.0015 (0.0015)	Accuracy 0.056 (0.056)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [7][0/199]	Time 3.396s (3.396s)	Speed 9.4 samples/s	Data 2.119s (2.119s)	Loss 0.00113 (0.00113)	Accuracy 0.023 (0.023)
+Epoch: [7][100/199]	Time 1.034s (1.093s)	Speed 31.0 samples/s	Data 0.000s (0.054s)	Loss 0.00120 (0.00121)	Accuracy 0.037 (0.029)
+Test: [0/6]	Time 1.125 (1.125)	Loss 0.0015 (0.0015)	Accuracy 0.051 (0.051)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [8][0/199]	Time 3.718s (3.718s)	Speed 8.6 samples/s	Data 2.479s (2.479s)	Loss 0.00131 (0.00131)	Accuracy 0.019 (0.019)
+Epoch: [8][100/199]	Time 1.028s (1.089s)	Speed 31.1 samples/s	Data 0.000s (0.053s)	Loss 0.00127 (0.00122)	Accuracy 0.019 (0.034)
+Test: [0/6]	Time 1.102 (1.102)	Loss 0.0015 (0.0015)	Accuracy 0.063 (0.063)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [9][0/199]	Time 3.561s (3.561s)	Speed 9.0 samples/s	Data 2.322s (2.322s)	Loss 0.00119 (0.00119)	Accuracy 0.019 (0.019)
+Epoch: [9][100/199]	Time 1.041s (1.099s)	Speed 30.7 samples/s	Data 0.000s (0.057s)	Loss 0.00126 (0.00121)	Accuracy 0.023 (0.027)
+Test: [0/6]	Time 1.137 (1.137)	Loss 0.0015 (0.0015)	Accuracy 0.030 (0.030)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [10][0/199]	Time 3.459s (3.459s)	Speed 9.3 samples/s	Data 2.271s (2.271s)	Loss 0.00118 (0.00118)	Accuracy 0.020 (0.020)
+Epoch: [10][100/199]	Time 1.041s (1.089s)	Speed 30.7 samples/s	Data 0.000s (0.051s)	Loss 0.00117 (0.00120)	Accuracy 0.020 (0.026)
+Test: [0/6]	Time 1.077 (1.077)	Loss 0.0015 (0.0015)	Accuracy 0.095 (0.095)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [11][0/199]	Time 3.496s (3.496s)	Speed 9.2 samples/s	Data 2.219s (2.219s)	Loss 0.00118 (0.00118)	Accuracy 0.045 (0.045)
+Epoch: [11][100/199]	Time 1.030s (1.091s)	Speed 31.1 samples/s	Data 0.000s (0.052s)	Loss 0.00116 (0.00121)	Accuracy 0.024 (0.029)
+Test: [0/6]	Time 1.102 (1.102)	Loss 0.0015 (0.0015)	Accuracy 0.070 (0.070)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.05s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [12][0/199]	Time 3.477s (3.477s)	Speed 9.2 samples/s	Data 2.369s (2.369s)	Loss 0.00113 (0.00113)	Accuracy 0.039 (0.039)
+Epoch: [12][100/199]	Time 1.047s (1.095s)	Speed 30.6 samples/s	Data 0.000s (0.055s)	Loss 0.00131 (0.00121)	Accuracy 0.028 (0.033)
+Test: [0/6]	Time 1.277 (1.277)	Loss 0.0015 (0.0015)	Accuracy 0.086 (0.086)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [13][0/199]	Time 3.733s (3.733s)	Speed 8.6 samples/s	Data 2.468s (2.468s)	Loss 0.00129 (0.00129)	Accuracy 0.013 (0.013)
+Epoch: [13][100/199]	Time 1.024s (1.085s)	Speed 31.3 samples/s	Data 0.000s (0.052s)	Loss 0.00124 (0.00120)	Accuracy 0.022 (0.032)
+Test: [0/6]	Time 1.127 (1.127)	Loss 0.0015 (0.0015)	Accuracy 0.032 (0.032)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [14][0/199]	Time 3.598s (3.598s)	Speed 8.9 samples/s	Data 2.324s (2.324s)	Loss 0.00110 (0.00110)	Accuracy 0.018 (0.018)
+Epoch: [14][100/199]	Time 1.029s (1.084s)	Speed 31.1 samples/s	Data 0.000s (0.051s)	Loss 0.00115 (0.00120)	Accuracy 0.053 (0.030)
+Test: [0/6]	Time 1.081 (1.081)	Loss 0.0015 (0.0015)	Accuracy 0.062 (0.062)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [15][0/199]	Time 3.772s (3.772s)	Speed 8.5 samples/s	Data 2.547s (2.547s)	Loss 0.00124 (0.00124)	Accuracy 0.032 (0.032)
+Epoch: [15][100/199]	Time 1.051s (1.091s)	Speed 30.5 samples/s	Data 0.001s (0.055s)	Loss 0.00118 (0.00121)	Accuracy 0.043 (0.035)
+Test: [0/6]	Time 1.208 (1.208)	Loss 0.0015 (0.0015)	Accuracy 0.070 (0.070)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [16][0/199]	Time 3.207s (3.207s)	Speed 10.0 samples/s	Data 2.005s (2.005s)	Loss 0.00118 (0.00118)	Accuracy 0.024 (0.024)
+Epoch: [16][100/199]	Time 1.042s (1.093s)	Speed 30.7 samples/s	Data 0.000s (0.052s)	Loss 0.00130 (0.00120)	Accuracy 0.051 (0.029)
+Test: [0/6]	Time 1.117 (1.117)	Loss 0.0015 (0.0015)	Accuracy 0.028 (0.028)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [17][0/199]	Time 3.457s (3.457s)	Speed 9.3 samples/s	Data 2.205s (2.205s)	Loss 0.00101 (0.00101)	Accuracy 0.039 (0.039)
+Epoch: [17][100/199]	Time 1.031s (1.091s)	Speed 31.0 samples/s	Data 0.000s (0.053s)	Loss 0.00127 (0.00121)	Accuracy 0.021 (0.033)
+Test: [0/6]	Time 1.124 (1.124)	Loss 0.0015 (0.0015)	Accuracy 0.069 (0.069)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.001
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.006
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.001
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.001 | 0.006 | 0.000 | 0.000 | 0.001 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [18][0/199]	Time 3.573s (3.573s)	Speed 9.0 samples/s	Data 2.398s (2.398s)	Loss 0.00121 (0.00121)	Accuracy 0.024 (0.024)
+Epoch: [18][100/199]	Time 1.030s (1.096s)	Speed 31.1 samples/s	Data 0.000s (0.057s)	Loss 0.00116 (0.00120)	Accuracy 0.064 (0.037)
+Test: [0/6]	Time 1.038 (1.038)	Loss 0.0015 (0.0015)	Accuracy 0.069 (0.069)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [19][0/199]	Time 3.667s (3.667s)	Speed 8.7 samples/s	Data 2.385s (2.385s)	Loss 0.00115 (0.00115)	Accuracy 0.041 (0.041)
+Epoch: [19][100/199]	Time 1.029s (1.091s)	Speed 31.1 samples/s	Data 0.003s (0.055s)	Loss 0.00113 (0.00119)	Accuracy 0.030 (0.039)
+Test: [0/6]	Time 1.157 (1.157)	Loss 0.0015 (0.0015)	Accuracy 0.088 (0.088)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [20][0/199]	Time 3.332s (3.332s)	Speed 9.6 samples/s	Data 2.097s (2.097s)	Loss 0.00118 (0.00118)	Accuracy 0.026 (0.026)
+Epoch: [20][100/199]	Time 1.030s (1.090s)	Speed 31.1 samples/s	Data 0.000s (0.056s)	Loss 0.00117 (0.00121)	Accuracy 0.033 (0.039)
+Test: [0/6]	Time 1.141 (1.141)	Loss 0.0015 (0.0015)	Accuracy 0.089 (0.089)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [21][0/199]	Time 3.997s (3.997s)	Speed 8.0 samples/s	Data 2.756s (2.756s)	Loss 0.00119 (0.00119)	Accuracy 0.035 (0.035)
+Epoch: [21][100/199]	Time 1.032s (1.093s)	Speed 31.0 samples/s	Data 0.000s (0.057s)	Loss 0.00118 (0.00120)	Accuracy 0.028 (0.040)
+Test: [0/6]	Time 1.130 (1.130)	Loss 0.0015 (0.0015)	Accuracy 0.065 (0.065)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [22][0/199]	Time 3.938s (3.938s)	Speed 8.1 samples/s	Data 2.742s (2.742s)	Loss 0.00124 (0.00124)	Accuracy 0.054 (0.054)
+Epoch: [22][100/199]	Time 1.040s (1.098s)	Speed 30.8 samples/s	Data 0.000s (0.060s)	Loss 0.00122 (0.00121)	Accuracy 0.028 (0.035)
+Test: [0/6]	Time 1.075 (1.075)	Loss 0.0015 (0.0015)	Accuracy 0.059 (0.059)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [23][0/199]	Time 3.573s (3.573s)	Speed 9.0 samples/s	Data 2.317s (2.317s)	Loss 0.00118 (0.00118)	Accuracy 0.026 (0.026)
+Epoch: [23][100/199]	Time 1.036s (1.089s)	Speed 30.9 samples/s	Data 0.000s (0.051s)	Loss 0.00124 (0.00120)	Accuracy 0.034 (0.036)
+Test: [0/6]	Time 1.123 (1.123)	Loss 0.0015 (0.0015)	Accuracy 0.093 (0.093)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [24][0/199]	Time 3.713s (3.713s)	Speed 8.6 samples/s	Data 2.432s (2.432s)	Loss 0.00114 (0.00114)	Accuracy 0.058 (0.058)
+Epoch: [24][100/199]	Time 1.036s (1.094s)	Speed 30.9 samples/s	Data 0.000s (0.054s)	Loss 0.00123 (0.00120)	Accuracy 0.023 (0.038)
+Test: [0/6]	Time 1.087 (1.087)	Loss 0.0015 (0.0015)	Accuracy 0.054 (0.054)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [25][0/199]	Time 3.918s (3.918s)	Speed 8.2 samples/s	Data 2.668s (2.668s)	Loss 0.00124 (0.00124)	Accuracy 0.028 (0.028)
+Epoch: [25][100/199]	Time 1.042s (1.095s)	Speed 30.7 samples/s	Data 0.000s (0.055s)	Loss 0.00094 (0.00121)	Accuracy 0.029 (0.032)
+Test: [0/6]	Time 1.186 (1.186)	Loss 0.0015 (0.0015)	Accuracy 0.065 (0.065)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [26][0/199]	Time 3.707s (3.707s)	Speed 8.6 samples/s	Data 2.480s (2.480s)	Loss 0.00130 (0.00130)	Accuracy 0.020 (0.020)
+Epoch: [26][100/199]	Time 1.036s (1.092s)	Speed 30.9 samples/s	Data 0.000s (0.052s)	Loss 0.00124 (0.00120)	Accuracy 0.017 (0.038)
+Test: [0/6]	Time 1.134 (1.134)	Loss 0.0015 (0.0015)	Accuracy 0.060 (0.060)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [27][0/199]	Time 3.870s (3.870s)	Speed 8.3 samples/s	Data 2.646s (2.646s)	Loss 0.00115 (0.00115)	Accuracy 0.037 (0.037)
+Epoch: [27][100/199]	Time 1.027s (1.092s)	Speed 31.2 samples/s	Data 0.000s (0.054s)	Loss 0.00118 (0.00120)	Accuracy 0.036 (0.040)
+Test: [0/6]	Time 1.128 (1.128)	Loss 0.0015 (0.0015)	Accuracy 0.078 (0.078)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [28][0/199]	Time 3.481s (3.481s)	Speed 9.2 samples/s	Data 2.293s (2.293s)	Loss 0.00119 (0.00119)	Accuracy 0.048 (0.048)
+Epoch: [28][100/199]	Time 1.039s (1.094s)	Speed 30.8 samples/s	Data 0.000s (0.054s)	Loss 0.00096 (0.00120)	Accuracy 0.038 (0.040)
+Test: [0/6]	Time 1.150 (1.150)	Loss 0.0015 (0.0015)	Accuracy 0.070 (0.070)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.01s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [29][0/199]	Time 3.263s (3.263s)	Speed 9.8 samples/s	Data 2.106s (2.106s)	Loss 0.00119 (0.00119)	Accuracy 0.065 (0.065)
+Epoch: [29][100/199]	Time 1.033s (1.094s)	Speed 31.0 samples/s	Data 0.000s (0.057s)	Loss 0.00115 (0.00120)	Accuracy 0.039 (0.041)
+Test: [0/6]	Time 1.096 (1.096)	Loss 0.0015 (0.0015)	Accuracy 0.061 (0.061)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [30][0/199]	Time 3.519s (3.519s)	Speed 9.1 samples/s	Data 2.320s (2.320s)	Loss 0.00126 (0.00126)	Accuracy 0.042 (0.042)
+Epoch: [30][100/199]	Time 1.028s (1.088s)	Speed 31.1 samples/s	Data 0.000s (0.056s)	Loss 0.00113 (0.00120)	Accuracy 0.055 (0.035)
+Test: [0/6]	Time 1.093 (1.093)	Loss 0.0015 (0.0015)	Accuracy 0.044 (0.044)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [31][0/199]	Time 3.943s (3.943s)	Speed 8.1 samples/s	Data 2.672s (2.672s)	Loss 0.00126 (0.00126)	Accuracy 0.032 (0.032)
+Epoch: [31][100/199]	Time 1.037s (1.091s)	Speed 30.8 samples/s	Data 0.000s (0.055s)	Loss 0.00130 (0.00121)	Accuracy 0.037 (0.037)
+Test: [0/6]	Time 1.106 (1.106)	Loss 0.0015 (0.0015)	Accuracy 0.056 (0.056)
+=> Writing results json to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.000
+=> coco eval results saved to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann/results/keypoints_val2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_DANN_pose_resnet_50_d256d256d256 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+=> saving checkpoint to output/coco/DANN_pose_resnet_50/256x192_d256x3_adam_lr1e-3_dann
+Alpha = 0.03
+Painting dataloader dim = 58
+Train dataloader dim = 199
+Epoch: [32][0/199]	Time 3.825s (3.825s)	Speed 8.4 samples/s	Data 2.473s (2.473s)	Loss 0.00129 (0.00129)	Accuracy 0.046 (0.046)
+Epoch: [32][100/199]	Time 1.030s (1.090s)	Speed 31.1 samples/s	Data 0.000s (0.054s)	Loss 0.00111 (0.00121)	Accuracy 0.033 (0.044)
+Traceback (most recent call last):
+  File "pose_estimation/train.py", line 257, in <module>
+    main()
+  File "pose_estimation/train.py", line 221, in main
+    final_output_dir, tb_log_dir, writer_dict, alpha, criterion_dann)
+  File "/content/gdrive/My Drive/Colab Notebooks/project_folder/human-pose-estimation.pytorch/pose_estimation/../lib/core/function.py", line 82, in train_dann
+    loss_train_domain.backward()
+  File "/usr/local/lib/python3.6/dist-packages/torch/tensor.py", line 166, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph)
+  File "/usr/local/lib/python3.6/dist-packages/torch/autograd/__init__.py", line 99, in backward
+    allow_unreachable=True)  # allow_unreachable flag
+KeyboardInterrupt
+
+

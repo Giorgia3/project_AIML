@@ -1,0 +1,111 @@
+
+
+/content/gdrive/My Drive/Colab Notebooks/project_folder/human-pose-estimation.pytorch
+=> creating output/coco/pose_resnet_50/256x192_d256x3_adam_lr1e-3_test
+=> creating log/coco/pose_resnet_50/256x192_d256x3_adam_lr1e-3_test_2020-02-06-16-31
+Namespace(cfg='experiments/coco/resnet50/256x192_d256x3_adam_lr1e-3_test.yaml', coco_bbox_file=None, flip_test=True, frequent=100, gpus=None, model_file='output/coco/pose_resnet_50/256x192_d256x3_adam_lr1e-3/risultati_1/final_state.pth.tar', post_process=False, shift_heatmap=False, use_detect_bbox=False, workers=None)
+{'CUDNN': {'BENCHMARK': True, 'DETERMINISTIC': False, 'ENABLED': True},
+ 'DATASET': {'DATASET': 'coco',
+             'DATA_FORMAT': 'jpg',
+             'FLIP': True,
+             'HYBRID_JOINTS_TYPE': '',
+             'PAINTING_SET': '',
+             'ROOT': 'data/coco/',
+             'ROT_FACTOR': 40,
+             'SCALE_FACTOR': 0.3,
+             'SELECT_DATA': False,
+             'TEST_SET': 'prova2017',
+             'TRAIN_NO_AUG_SET': '',
+             'TRAIN_SET': 'train2017'},
+ 'DATA_DIR': '',
+ 'DEBUG': {'DEBUG': True,
+           'SAVE_BATCH_IMAGES_GT': True,
+           'SAVE_BATCH_IMAGES_PRED': True,
+           'SAVE_HEATMAPS_GT': True,
+           'SAVE_HEATMAPS_PRED': True},
+ 'GPUS': '0',
+ 'LOG_DIR': 'log',
+ 'LOSS': {'USE_TARGET_WEIGHT': True},
+ 'MODEL': {'EXTRA': {'DECONV_WITH_BIAS': False,
+                     'FINAL_CONV_KERNEL': 1,
+                     'HEATMAP_SIZE': array([48, 64]),
+                     'NUM_DECONV_FILTERS': [256, 256, 256],
+                     'NUM_DECONV_KERNELS': [4, 4, 4],
+                     'NUM_DECONV_LAYERS': 3,
+                     'NUM_LAYERS': 50,
+                     'SIGMA': 2,
+                     'TARGET_TYPE': 'gaussian'},
+           'IMAGE_SIZE': array([192, 256]),
+           'INIT_WEIGHTS': True,
+           'NAME': 'pose_resnet',
+           'NUM_JOINTS': 17,
+           'PRETRAINED': 'models/pytorch/imagenet/resnet50-19c8e357.pth',
+           'STYLE': 'pytorch'},
+ 'OUTPUT_DIR': 'output',
+ 'PRINT_FREQ': 100,
+ 'TEST': {'BATCH_SIZE': 32,
+          'BBOX_THRE': 1.0,
+          'COCO_BBOX_FILE': '',
+          'FLIP_TEST': True,
+          'IMAGE_THRE': 0.0,
+          'IN_VIS_THRE': 0.2,
+          'MODEL_FILE': 'output/coco/pose_resnet_50/256x192_d256x3_adam_lr1e-3/risultati_1/final_state.pth.tar',
+          'NMS_THRE': 1.0,
+          'OKS_THRE': 0.9,
+          'POST_PROCESS': True,
+          'SHIFT_HEATMAP': True,
+          'USE_GT_BBOX': True},
+ 'TRAIN': {'BATCH_SIZE': 32,
+           'BEGIN_EPOCH': 0,
+           'CHECKPOINT': '',
+           'END_EPOCH': 140,
+           'GAMMA1': 0.99,
+           'GAMMA2': 0.0,
+           'LR': 0.001,
+           'LR_FACTOR': 0.1,
+           'LR_STEP': [90, 120],
+           'MOMENTUM': 0.9,
+           'NESTEROV': False,
+           'OPTIMIZER': 'adam',
+           'RESUME': False,
+           'SHUFFLE': True,
+           'WD': 0.0001},
+ 'WORKERS': 4}
+=> loading model from output/coco/pose_resnet_50/256x192_d256x3_adam_lr1e-3/risultati_1/final_state.pth.tar
+/usr/local/lib/python3.6/dist-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='mean' instead.
+  warnings.warn(warning.format(ret))
+loading annotations into memory...
+Done (t=0.87s)
+creating index...
+index created!
+=> classes: ['__background__', 'person']
+=> num_images: 88
+=> load 143 samples
+Test: [0/5]	Time 16.374 (16.374)	Loss 0.0006 (0.0006)	Accuracy 0.742 (0.742)
+=> Writing results json to output/coco/pose_resnet_50/256x192_d256x3_adam_lr1e-3_test/results/keypoints_prova2017_results.json
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *keypoints*
+DONE (t=0.04s).
+Accumulating evaluation results...
+DONE (t=0.01s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.617
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.936
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.756
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.423
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 20 ] = 0.659
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets= 20 ] = 0.944
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets= 20 ] = 0.790
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets= 20 ] = 0.427
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets= 20 ] = 0.679
+=> coco eval results saved to output/coco/pose_resnet_50/256x192_d256x3_adam_lr1e-3_test/results/keypoints_prova2017_results.pkl
+| Arch | AP | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 256x192_pose_resnet_50_d256d256d256 | 0.617 | 0.936 | 0.756 | 0.423 | 0.634 | 0.659 | 0.944 | 0.790 | 0.427 | 0.679 |
+
+'\n#training adda \n! python pose_estimation/train.py     --cfg experiments/coco/resnet50/256x192_d256x3_adam_lr1e-3_adda.yaml     --adapt 2\n'
+
