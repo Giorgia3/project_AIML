@@ -411,7 +411,6 @@ def train_adda(args,config):
     
     painting_loader = torch.utils.data.DataLoader(
           painting_dataset,
-          #valid_dataset,
           batch_size=config.TRAIN.BATCH_SIZE*len(gpus),
           shuffle=config.TRAIN.SHUFFLE,
           num_workers=config.WORKERS,
@@ -420,6 +419,7 @@ def train_adda(args,config):
     #painting_loader=copy.deepcopy(valid_loader)
     
     ###################### TRAIN SOURCE ENCODER AND POSE ESTIMATOR ######################
+    '''
     print("(1.a)-----------------Training pose estimator for source")
     best_perf = 0.0
     best_model = False
@@ -437,17 +437,17 @@ def train_adda(args,config):
                                   source_encoder, pose_estimator,
                                   criterion, final_output_dir, tb_log_dir)
         lr_scheduler.step()
-
-        '''if perf_indicator >= best_perf:
+    
+        if perf_indicator >= best_perf:
             best_perf = perf_indicator
             best_model = True
             best_source_encoder=copy.deepcopy(source_encoder)
             best_pose_estimator=copy.deepcopy(pose_estimator)
         else:
             best_model = False
-		'''
+		
         
-        '''logger.info('=> saving checkpoint to {}'.format(final_output_dir))
+        logger.info('=> saving checkpoint to {}'.format(final_output_dir))
         save_checkpoint({
             'epoch': epoch + 1,
             'model': get_model_name(config),
@@ -461,7 +461,7 @@ def train_adda(args,config):
     logger.info('saving final model state to {}'.format(
         final_model_state_file))
     torch.save(model.module.state_dict(), final_model_state_file)
-    writer_dict['writer'].close()'''
+    writer_dict['writer'].close()
     
     print("(1.b)----------------Evaluation source encoder")
     
@@ -469,6 +469,7 @@ def train_adda(args,config):
                                   source_encoder, pose_estimator,
                                   criterion, final_output_dir, tb_log_dir)
     
+    '''
     ###################### TRAIN TARGET ENCODER ######################
     print("(2)----------------Training target encoder")
   
@@ -487,7 +488,7 @@ def train_adda(args,config):
     print("(3.b)---------------->>> domain adaption <<<")
     eval_tgt(config, valid_loader, valid_dataset, 
              target_encoder, pose_estimator,
-             criterion, final_output_dir, tb_log_dir)
+             criterion, final_output_dir + '2', tb_log_dir)
     
 def main():
     DANN = False

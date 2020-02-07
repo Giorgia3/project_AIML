@@ -33,6 +33,7 @@ def pil_loader(path):
         im_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
         #return img.convert('RGB')
         return Image.fromarray(im_bgr)
+
     
 class PaintingDataset(Dataset):
     def __init__(self, cfg, root, image_set, is_train, transform=None):
@@ -106,7 +107,7 @@ class PaintingDataset(Dataset):
         height = 256
         dim = (width, height) 
         resized = cv2.resize(data_numpy, dim)
-        
+      
         
         '''r = 256.0 / data_numpy.shape[1]
         dim = (256, int(data_numpy.shape[0] * r))

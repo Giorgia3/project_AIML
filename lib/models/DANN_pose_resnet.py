@@ -305,7 +305,7 @@ class PoseResNet(nn.Module):
 
         return nn.Sequential(*layers)
     '''
-    ###### Più discriminatori################
+    ###### Piu discriminatori################
     def forward(self, x, alpha=None, alpha2=None, alpha3=None):
 
         x = self.conv1(x)

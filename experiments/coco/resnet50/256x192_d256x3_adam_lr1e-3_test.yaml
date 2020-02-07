@@ -8,7 +8,7 @@ PRINT_FREQ: 100
 DATASET:
   DATASET: 'coco'
   ROOT: 'data/coco/'
-  TEST_SET: 'test2017'
+  TEST_SET: 'prova2017'
   TRAIN_SET: 'train2017'
   FLIP: true
   ROT_FACTOR: 40

@@ -246,16 +246,17 @@ def train_tgt(src_encoder, tgt_encoder, critic,
             #######################
             # 2.3 print step info #
             #######################
-            if ((step + 1) % 100 == 0):
+            #if ((step + 1) % 100 == 0):
+            if step % config.PRINT_FREQ == 0:
                 print("Epoch [{}/{}] Step [{}/{}]:"
                       "d_loss={:.5f} g_loss={:.5f} acc={:.5f}"
                       .format(epoch + 1,
                               config.TRAIN.END_EPOCH-config.TRAIN.BEGIN_EPOCH,
                               step + 1,
                               len_data_loader,
-                              loss_critic.data[0],
-                              loss_tgt.data[0],
-                              acc.data[0]))
+                              loss_critic.item(),
+                              loss_tgt.item(),
+                              acc.item()))
 
         #############################
         # 2.4 save model parameters #

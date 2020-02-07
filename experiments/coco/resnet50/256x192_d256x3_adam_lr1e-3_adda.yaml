@@ -8,7 +8,7 @@ PRINT_FREQ: 100
 DATASET:
   DATASET: 'coco'
   ROOT: 'data/coco/'
-  TEST_SET: 'val2017'
+  TEST_SET: 'prova2017'
   TRAIN_SET: 'train2017'
   PAINTING_SET: 'painting_train'
   FLIP: true
@@ -16,7 +16,7 @@ DATASET:
   SCALE_FACTOR: 0.3
 MODEL:
   NAME: 'ADDA_pose_resnet'
-  PRETRAINED: 'models/pytorch/imagenet/resnet50-19c8e357.pth'
+  PRETRAINED: 'models/pytorch/pose_coco/pose_resnet_50_256x192.pth.tar'
   IMAGE_SIZE:
   - 192
   - 256
@@ -45,7 +45,7 @@ TRAIN:
   BATCH_SIZE: 32
   SHUFFLE: true
   BEGIN_EPOCH: 0
-  END_EPOCH: 1
+  END_EPOCH: 140
   RESUME: false
   OPTIMIZER: 'adam'
   LR: 0.001

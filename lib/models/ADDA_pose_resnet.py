@@ -317,8 +317,8 @@ def get_pose_net_encoder(cfg, is_train, **kwargs):
     model = PoseResNet_encoder(block_class, layers, cfg, **kwargs)
 
     if is_train and cfg.MODEL.INIT_WEIGHTS:
-        model.init_weights(cfg.MODEL.PRETRAINED)
-
+        #model.init_weights(cfg.MODEL.PRETRAINED)
+        model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED))
     return model
 
 class PoseResNet_deconv(nn.Module):
@@ -490,6 +490,7 @@ def get_pose_net_deconv(cfg, is_train, **kwargs):
     model = PoseResNet_deconv(block_class, layers, cfg, **kwargs)
 
     if is_train and cfg.MODEL.INIT_WEIGHTS:
-        model.init_weights(cfg.MODEL.PRETRAINED)
+        #model.init_weights(cfg.MODEL.PRETRAINED)
+        model.load_state_dict(torch.load(cfg.MODEL.PRETRAINED))
 
     return model

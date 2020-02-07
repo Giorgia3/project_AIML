@@ -48,7 +48,7 @@ TRAIN:
   BEGIN_EPOCH: 0
   END_EPOCH: 140
   RESUME: false
-  OPTIMIZER: 'sgd'
+  OPTIMIZER: 'adam'
   LR: 0.001
   LR_FACTOR: 0.1
   LR_STEP:
